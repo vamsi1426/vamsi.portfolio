@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-cream: #FAF8F4;
+  --color-brand-cream-dark: #F3EEE3;
+  --color-brand-green: #2B5129;
+  --color-brand-green-light: #3E6E3B;
+  --color-brand-mango: #FFB01A;
+  --color-brand-mango-hover: #FFA000;
+  --color-brand-orange: #FF8E53;
+  --color-brand-brown: #4D3826;
+  --color-brand-brown-light: #70523C;
+  --color-brand-sky: #E1F0F7;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Outfit", sans-serif;
+  
+  --animate-sway: sway 6s ease-in-out infinite;
+  --animate-gentle-swing: swing 4s ease-in-out infinite alternate;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-leaf-float: leaf-float 12s linear infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes swing {
+  0% { transform: rotate(-8deg); transform-origin: top center; }
+  100% { transform: rotate(8deg); transform-origin: top center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes leaf-float {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) translateX(50px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Custom baseline styling */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Outfit', sans-serif;
+  background-color: #FAF8F4;
+  color: #4D3826;
+  overflow-x: hidden;
+}
+
+/* Custom modern scrollbar mimicking tree vine curves */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F4;
+}
+::-webkit-scrollbar-thumb {
+  background: #3E6E3B;
+  border-radius: 5px;
+  border: 2px solid #FAF8F4;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2B5129;
+}
+
+/* Custom premium styles */
+.glass-panel {
+  background: rgba(250, 248, 244, 0.65);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(62, 110, 59, 0.12);
+}
+
+.glass-panel-dark {
+  background: rgba(77, 56, 38, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(77, 56, 38, 0.08);
+}
+
+.glow-border:hover {
+  box-shadow: 0 0 15px rgba(255, 176, 26, 0.25);
+  border-color: rgba(255, 176, 26, 0.4);
+}
+
+/* Root sizing overrides */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: left;
+  border-inline: none;
+  min-height: 100vh;
+  display: block;
+}
