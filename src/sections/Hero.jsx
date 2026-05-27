@@ -272,14 +272,14 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Right Column (Concentric Orbiting Gold Rings + Portrait Capsule - Hidden on Mobile, Flex on Desktop) */}
-        <div className="hidden lg:flex lg:col-span-6 justify-center items-center order-1 lg:order-2 w-full min-h-[440px] md:min-h-[520px] overflow-visible relative">
+        {/* Right Column (Highly Visually-Polished Layered Concentric Orbiting Gold/Green Rings + Portrait Capsule) */}
+        <div className="flex lg:col-span-6 justify-center items-center order-1 lg:order-2 w-full min-h-[340px] sm:min-h-[460px] md:min-h-[520px] overflow-visible relative mb-6 lg:mb-0">
           
           {/* Main Container with slow floating animation */}
           <motion.div
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative w-full max-w-[320px] sm:max-w-[400px] aspect-square flex items-center justify-center overflow-visible"
+            className="relative w-[250px] h-[250px] sm:w-[340px] sm:h-[340px] lg:w-[390px] lg:h-[390px] xl:w-[410px] xl:h-[410px] aspect-square flex items-center justify-center overflow-visible"
           >
             
             {/* LAYER 1: Deepest Layer (Ambient Holographic Radial Glow) */}
@@ -290,12 +290,15 @@ export default function Hero() {
               <div className="absolute w-[80%] h-[80%] rounded-full bg-gradient-to-tr from-brand-mango/20 via-brand-orange/10 to-brand-sky/25 blur-3xl opacity-80" />
             </motion.div>
 
-            {/* LAYER 2: Concentric Orbiting Rings (SVG-rendered with dual-opposite slow premium rotations) */}
+            {/* LAYER 1.5: Glassmorphic Backdrop Disk (Creates standard-grade UI/UX depth under orbit rings) */}
+            <div className="absolute w-[112%] h-[112%] rounded-full bg-brand-cream-dark/[0.03] border border-brand-brown/[0.04] backdrop-blur-[1.5px] pointer-events-none" />
+
+            {/* LAYER 2: Concentric Orbiting Rings (SVG-rendered with multi-layered glow and dual-opposite rotations) */}
             <motion.div
               style={{ x: outerRingsX, y: outerRingsY }}
               className="absolute w-[136%] h-[136%] pointer-events-none overflow-visible flex items-center justify-center"
             >
-              {/* Common SVG gradients definitions wrapper */}
+              {/* Common SVG gradients and filters definitions wrapper */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible hidden">
                 <defs>
                   {/* Luxury Metallic Gold Gradient */}
@@ -308,64 +311,99 @@ export default function Hero() {
                   
                   {/* Inner Soft radial ring glow */}
                   <radialGradient id="ringBackGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#ECCBA6" stopOpacity="0.2" />
+                    <stop offset="0%" stopColor="#ECCBA6" stopOpacity="0.22" />
                     <stop offset="100%" stopColor="#ECCBA6" stopOpacity="0" />
                   </radialGradient>
+
+                  {/* Soft Luxury Gold Glow Filter */}
+                  <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="5" result="blur" />
+                    <feComponentTransfer in="blur" result="boost">
+                      <feFuncA type="linear" slope="0.7" />
+                    </feComponentTransfer>
+                    <feMerge>
+                      <feMergeNode in="boost" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+
+                  {/* Soft Nature Green Glow Filter */}
+                  <filter id="greenGlow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComponentTransfer in="blur" result="boost">
+                      <feFuncA type="linear" slope="0.55" />
+                    </feComponentTransfer>
+                    <feMerge>
+                      <feMergeNode in="boost" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
                 </defs>
               </svg>
 
               {/* Ambient Ring Back Glow */}
               <div className="absolute w-full h-full flex items-center justify-center">
-                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible opacity-50">
-                  <circle cx="250" cy="250" r="190" fill="url(#ringBackGlow)" />
+                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible opacity-60">
+                  <circle cx="250" cy="250" r="200" fill="url(#ringBackGlow)" />
                 </svg>
               </div>
 
-              {/* Layer 2a: Clockwise Orbiting Elements (Outer Rings & Sparks) */}
+              {/* Layer 2a: Clockwise Orbiting Elements (Innermost Gold Ring & Sparks) */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 75, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 w-full h-full"
               >
                 <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
-                  {/* Ring 2: Large Golden Ring (Thinner, far outside portrait boundary) */}
-                  <circle cx="250" cy="250" r="245" fill="none" stroke="url(#goldMetallic)" strokeWidth="0.8" opacity="0.45" />
-
-                  {/* Dotted arc detail (Sparsely placed strictly outside the picture) */}
-                  <path d="M 250 5 A 245 245 0 0 1 470 185" fill="none" stroke="url(#goldMetallic)" strokeWidth="0.8" strokeDasharray="1 5" opacity="0.7" />
+                  {/* Ring 1: Medium Golden Ring (Solid, with luxury stroke glow) */}
+                  <circle cx="250" cy="250" r="215" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.8" filter="url(#goldGlow)" opacity="0.95" />
 
                   {/* Solid Orbiting Nodes & Sparks */}
-                  <circle cx="430" cy="150" r="5" fill="#D5AC81" />
-                  <circle cx="442" cy="108" r="6" fill="#2B5129" />
-                  <circle cx="410" cy="188" r="2.8" fill="#ECCBA6" />
+                  <circle cx="250" cy="35" r="5.5" fill="#D5AC81" filter="url(#goldGlow)" />
+                  <circle cx="74" cy="148" r="4.5" fill="#3E6E3B" />
                 </svg>
               </motion.div>
 
-              {/* Layer 2b: Counter-Clockwise Orbiting Elements (Inner Rings & Sparks) */}
+              {/* Layer 2b: Counter-Clockwise Orbiting Elements (Middle Dashed Algorithmic Ring & Sparks) */}
               <motion.div
                 animate={{ rotate: -360 }}
-                transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 58, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 w-full h-full"
               >
                 <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
-                  {/* Ring 1: Medium Golden Ring (Strictly outside portrait r=205 boundary) */}
-                  <circle cx="250" cy="250" r="215" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.2" opacity="0.75" />
+                  {/* Ring 2: Concentric Algorithmic Dashed Ring (Warm natural green) */}
+                  <circle cx="250" cy="250" r="235" fill="none" stroke="#3E6E3B" strokeWidth="1.4" strokeDasharray="5 10" filter="url(#greenGlow)" opacity="0.8" />
 
                   {/* Organic green dotted arc detail */}
-                  <path d="M 35 320 A 215 215 0 0 1 125 440" fill="none" stroke="#3E6E3B" strokeWidth="1.2" strokeDasharray="1 3" opacity="0.6" />
+                  <path d="M 35 320 A 235 235 0 0 1 125 460" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.0" strokeDasharray="1 4" opacity="0.5" />
 
                   {/* Solid Orbiting Nodes & Sparks */}
-                  <circle cx="70" cy="262" r="4.5" fill="#D5AC81" />
-                  <circle cx="125" cy="405" r="4" fill="#BA9267" />
-                  <circle cx="320" cy="455" r="5.5" fill="#3E6E3B" />
+                  <circle cx="250" cy="15" r="6.5" fill="#2B5129" filter="url(#greenGlow)" />
+                  <circle cx="443" cy="330" r="3.2" fill="#ECCBA6" />
+                </svg>
+              </motion.div>
+
+              {/* Layer 2c: Clockwise Outer Orbiting Elements (Outermost Gold Thin Ring & Sparks) */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 85, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 w-full h-full"
+              >
+                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
+                  {/* Ring 3: Large Thin Golden Ring */}
+                  <circle cx="250" cy="250" r="255" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.0" filter="url(#goldGlow)" opacity="0.65" />
+
+                  {/* Solid Orbiting Nodes & Sparks */}
+                  <circle cx="471" cy="150" r="5" fill="#BA9267" />
+                  <circle cx="29" cy="250" r="4" fill="#D5AC81" />
                 </svg>
               </motion.div>
             </motion.div>
 
-            {/* LAYER 3: Core Portrait Capsule (Frosted glass frame envelope) */}
+            {/* LAYER 3: Core Portrait Capsule (Thicker frosted glass edge with warm organic drop shadow) */}
             <motion.div
               style={{ x: portraitX, y: portraitY }}
-              className="relative w-[82%] h-[82%] rounded-full p-2.5 bg-brand-cream-dark/15 border border-brand-green/12 backdrop-blur-[6px] shadow-[0_20px_50px_rgba(77,56,38,0.12)] flex items-center justify-center overflow-visible"
+              className="relative w-[82%] h-[82%] rounded-full p-2 bg-brand-cream-dark/20 border-2 border-brand-green/18 backdrop-blur-[8px] shadow-[0_25px_55px_rgba(77,56,38,0.16),0_4px_15px_rgba(43,81,41,0.06)] flex items-center justify-center overflow-visible"
             >
               {/* Circular portrait mask */}
               <div className="w-full h-full rounded-full overflow-hidden relative shadow-inner">
@@ -387,16 +425,18 @@ export default function Hero() {
             >
               {/* Floating micro spark particles drifting in outer spaces */}
               {[
-                { delay: 0, duration: 8, left: "15%", top: "12%" },
-                { delay: 2.2, duration: 10, left: "85%", top: "25%" },
-                { delay: 4.8, duration: 9, left: "12%", top: "75%" }
+                { delay: 0, duration: 8, left: "15%", top: "12%", size: "w-2.5 h-2.5" },
+                { delay: 2.2, duration: 10, left: "85%", top: "25%", size: "w-3 h-3" },
+                { delay: 4.8, duration: 9, left: "12%", top: "75%", size: "w-2 h-2" },
+                { delay: 1.5, duration: 11, left: "78%", top: "82%", size: "w-2.5 h-2.5" },
+                { delay: 3.5, duration: 7, left: "50%", top: "5%", size: "w-2 h-2" }
               ].map((part, idx) => (
                 <motion.div
                   key={idx}
                   animate={{
-                    y: [0, -10, 0],
-                    x: [0, 6, 0],
-                    opacity: [0, 0.8, 0]
+                    y: [0, -12, 0],
+                    x: [0, 8, 0],
+                    opacity: [0, 0.85, 0]
                   }}
                   transition={{
                     duration: part.duration,
@@ -405,7 +445,7 @@ export default function Hero() {
                     delay: part.delay
                   }}
                   style={{ left: part.left, top: part.top }}
-                  className="absolute w-2.5 h-2.5 rounded-full bg-brand-mango/30 border border-brand-mango/50"
+                  className={`absolute ${part.size} rounded-full bg-brand-mango/30 border border-brand-mango/60`}
                 />
               ))}
             </motion.div>
