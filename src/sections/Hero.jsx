@@ -45,8 +45,8 @@ export default function Hero() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   
-  // Smooth spring parallax controls
-  const springConfig = { stiffness: 65, damping: 22 };
+  // Smooth spring parallax controls for premium weight and luxurious glide
+  const springConfig = { stiffness: 45, damping: 25 };
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig);
 
@@ -135,17 +135,17 @@ export default function Hero() {
         {/* Left Column (Brand & Profile Details) */}
         <motion.div
           style={{ x: textParallaxX, y: textParallaxY }}
-          className="lg:col-span-6 flex flex-col items-start text-left order-2 lg:order-1"
+          className="lg:col-span-6 flex flex-col items-center text-center lg:items-start lg:text-left order-2 lg:order-1"
         >
           {/* Subtle accent tag */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="flex items-center gap-2 mb-4 bg-brand-green/6 text-brand-green font-sans text-xs md:text-sm font-semibold tracking-widest uppercase px-4.5 py-1.5 rounded-full border border-brand-green/12"
+            className="flex items-center gap-2 mb-5.5 bg-brand-green/[0.04] text-brand-green-light font-sans text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase px-4.5 py-1.5 rounded-full border border-brand-green/8 shadow-[0_2px_10px_rgba(43,81,41,0.03)] backdrop-blur-[2px]"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-mango animate-pulse" />
-            Full Stack & AI Engineer
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-mango animate-[pulse_2.5s_infinite]" />
+            Software Engineer & AI Enthusiast
           </motion.div>
 
           {/* Staggered Name Reveal */}
@@ -153,7 +153,7 @@ export default function Hero() {
             variants={containerVars}
             initial="initial"
             animate="animate"
-            className="font-display font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight text-brand-brown mb-3 leading-[0.92] flex flex-wrap gap-x-4 gap-y-2 w-full"
+            className="font-display font-extrabold text-5xl md:text-7xl lg:text-[4.75rem] xl:text-[5.5rem] tracking-tight text-brand-brown mb-3 leading-[1.0] flex flex-wrap justify-center lg:justify-start gap-x-4 gap-y-2 w-full"
           >
             {words.map((word, wordIndex) => (
               <span key={wordIndex} className="whitespace-nowrap inline-block">
@@ -175,9 +175,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 0.95, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="font-sans text-lg md:text-2xl text-brand-green-light font-medium tracking-wide mb-5"
+            className="font-sans text-lg md:text-xl lg:text-2xl text-brand-green-light font-medium tracking-wide mb-5.5 flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1"
           >
-            {PERSONAL_DETAILS.title} <span className="text-brand-brown/40 mx-2">|</span> <span className="text-brand-brown">{PERSONAL_DETAILS.subtitle}</span>
+            <span>{PERSONAL_DETAILS.title}</span> 
+            <span className="hidden sm:inline text-brand-brown/25">|</span> 
+            <span className="text-brand-brown font-normal block sm:inline">{PERSONAL_DETAILS.subtitle}</span>
           </motion.h2>
 
           {/* Tagline */}
@@ -185,66 +187,87 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 0.85, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="font-sans text-base md:text-lg text-brand-brown font-light leading-relaxed max-w-xl mb-9"
+            className="font-sans text-base md:text-lg text-brand-brown/85 font-light leading-relaxed max-w-xl mb-5"
           >
             {PERSONAL_DETAILS.tagline}
           </motion.p>
+
+          {/* Tech Stack Line */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 0.8, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2.5 gap-y-1.5 text-xs md:text-sm font-sans text-brand-brown/70 mb-8 max-w-xl select-none"
+          >
+            <span className="font-semibold text-brand-brown/40 uppercase tracking-widest text-[10px] mr-1">Focus:</span>
+            <span className="font-medium hover:text-brand-green transition-colors duration-200">Java</span>
+            <span className="text-brand-green/25 font-bold select-none">•</span>
+            <span className="font-medium hover:text-brand-green transition-colors duration-200">Python</span>
+            <span className="text-brand-green/25 font-bold select-none">•</span>
+            <span className="font-medium hover:text-brand-green transition-colors duration-200">React.js</span>
+            <span className="text-brand-green/25 font-bold select-none">•</span>
+            <span className="font-medium hover:text-brand-green transition-colors duration-200">Node.js</span>
+            <span className="text-brand-green/25 font-bold select-none">•</span>
+            <span className="font-medium hover:text-brand-green transition-colors duration-200">AI</span>
+            <span className="text-brand-green/25 font-bold select-none">•</span>
+            <span className="font-medium hover:text-brand-green transition-colors duration-200 text-brand-brown/90">Full Stack Development</span>
+          </motion.div>
 
           {/* Action CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4.5 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 w-full sm:w-auto mb-10"
           >
             <button
               onClick={() => handleScrollToSection("projects")}
-              className="bg-brand-green hover:bg-brand-green-light text-brand-cream font-semibold tracking-wide uppercase px-8.5 py-4 rounded-full text-xs md:text-sm shadow-lg hover:shadow-xl transition-all cursor-pointer focus:outline-none flex items-center justify-center gap-2 group"
+              className="bg-brand-green hover:bg-brand-green-light text-brand-cream font-semibold tracking-wide uppercase px-8.5 py-4 rounded-full text-xs md:text-sm shadow-[0_4px_18px_rgba(43,81,41,0.12)] hover:shadow-[0_8px_25px_rgba(43,81,41,0.22)] transition-all duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer focus:outline-none flex items-center justify-center gap-2 group"
             >
-              Harvest Projects
-              <ArrowDown size={16} className="group-hover:translate-y-1 transition-transform" />
+              View Projects
+              <ArrowDown size={16} className="group-hover:translate-y-1 transition-transform duration-300" />
             </button>
 
             <button
               onClick={() => handleScrollToSection("contact")}
-              className="bg-transparent hover:bg-brand-brown/5 text-brand-brown border border-brand-brown-light/20 font-semibold tracking-wide uppercase px-8.5 py-4 rounded-full text-xs md:text-sm transition-all cursor-pointer focus:outline-none flex items-center justify-center gap-2"
+              className="bg-transparent hover:bg-brand-brown/[0.03] text-brand-brown border border-brand-brown-light/15 hover:border-brand-brown/35 font-semibold tracking-wide uppercase px-8.5 py-4 rounded-full text-xs md:text-sm transition-all duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer focus:outline-none flex items-center justify-center gap-2 group"
             >
               Get in Touch
-              <Mail size={16} />
+              <Mail size={16} className="group-hover:scale-105 transition-transform duration-300" />
             </button>
           </motion.div>
 
           {/* Social Row */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
+            animate={{ opacity: 0.85 }}
             transition={{ duration: 1.2, delay: 1.1 }}
-            className="flex items-center gap-5 mt-12"
+            className="flex items-center justify-center lg:justify-start gap-4 mt-2"
           >
             <a
               href={PERSONAL_DETAILS.github}
               target="_blank"
               rel="noreferrer"
-              className="text-brand-brown hover:text-brand-green transition-colors focus:outline-none"
+              className="w-10 h-10 rounded-full bg-brand-brown/[0.02] hover:bg-brand-green/[0.08] border border-brand-brown/[0.08] hover:border-brand-green/25 flex items-center justify-center text-brand-brown/70 hover:text-brand-green transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md hover:shadow-brand-green/5 cursor-pointer focus:outline-none group"
               aria-label="GitHub Profile"
             >
-              <Github size={20} />
+              <Github size={18} className="transition-transform duration-300 group-hover:scale-110" />
             </a>
             <a
               href={PERSONAL_DETAILS.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="text-brand-brown hover:text-brand-green transition-colors focus:outline-none"
+              className="w-10 h-10 rounded-full bg-brand-brown/[0.02] hover:bg-brand-green/[0.08] border border-brand-brown/[0.08] hover:border-brand-green/25 flex items-center justify-center text-brand-brown/70 hover:text-brand-green transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md hover:shadow-brand-green/5 cursor-pointer focus:outline-none group"
               aria-label="LinkedIn Profile"
             >
-              <Linkedin size={20} />
+              <Linkedin size={18} className="transition-transform duration-300 group-hover:scale-110" />
             </a>
             <a
               href={`mailto:${PERSONAL_DETAILS.email}`}
-              className="text-brand-brown hover:text-brand-green transition-colors focus:outline-none"
+              className="w-10 h-10 rounded-full bg-brand-brown/[0.02] hover:bg-brand-green/[0.08] border border-brand-brown/[0.08] hover:border-brand-green/25 flex items-center justify-center text-brand-brown/70 hover:text-brand-green transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md hover:shadow-brand-green/5 cursor-pointer focus:outline-none group"
               aria-label="Email Me"
             >
-              <Mail size={20} />
+              <Mail size={18} className="transition-transform duration-300 group-hover:scale-110" />
             </a>
           </motion.div>
         </motion.div>
@@ -267,17 +290,13 @@ export default function Hero() {
               <div className="absolute w-[80%] h-[80%] rounded-full bg-gradient-to-tr from-brand-mango/20 via-brand-orange/10 to-brand-sky/25 blur-3xl opacity-80" />
             </motion.div>
 
-            {/* LAYER 2: Concentric Orbiting Rings (SVG-rendered for absolute golden elegance matching reference image) */}
+            {/* LAYER 2: Concentric Orbiting Rings (SVG-rendered with dual-opposite slow premium rotations) */}
             <motion.div
               style={{ x: outerRingsX, y: outerRingsY }}
               className="absolute w-[136%] h-[136%] pointer-events-none overflow-visible flex items-center justify-center"
             >
-              <motion.svg
-                animate={{ rotate: 360 }}
-                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                viewBox="0 0 500 500" 
-                className="w-full h-full overflow-visible"
-              >
+              {/* Common SVG gradients definitions wrapper */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible hidden">
                 <defs>
                   {/* Luxury Metallic Gold Gradient */}
                   <linearGradient id="goldMetallic" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -293,34 +312,54 @@ export default function Hero() {
                     <stop offset="100%" stopColor="#ECCBA6" stopOpacity="0" />
                   </radialGradient>
                 </defs>
+              </svg>
 
-                {/* Back glow underneath */}
-                <circle cx="250" cy="250" r="190" fill="url(#ringBackGlow)" />
+              {/* Ambient Ring Back Glow */}
+              <div className="absolute w-full h-full flex items-center justify-center">
+                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible opacity-50">
+                  <circle cx="250" cy="250" r="190" fill="url(#ringBackGlow)" />
+                </svg>
+              </div>
 
-                {/* Ring 1: Medium Golden Ring (Strictly outside portrait r=205 boundary) */}
-                <circle cx="250" cy="250" r="215" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.2" opacity="0.85" />
+              {/* Layer 2a: Clockwise Orbiting Elements (Outer Rings & Sparks) */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 75, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 w-full h-full"
+              >
+                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
+                  {/* Ring 2: Large Golden Ring (Thinner, far outside portrait boundary) */}
+                  <circle cx="250" cy="250" r="245" fill="none" stroke="url(#goldMetallic)" strokeWidth="0.8" opacity="0.45" />
 
-                {/* Ring 2: Large Golden Ring (Thinner, far outside portrait boundary) */}
-                <circle cx="250" cy="250" r="245" fill="none" stroke="url(#goldMetallic)" strokeWidth="0.8" opacity="0.6" />
+                  {/* Dotted arc detail (Sparsely placed strictly outside the picture) */}
+                  <path d="M 250 5 A 245 245 0 0 1 470 185" fill="none" stroke="url(#goldMetallic)" strokeWidth="0.8" strokeDasharray="1 5" opacity="0.7" />
 
-                {/* Dotted arc details (Sparsely placed strictly outside the picture) */}
-                <path d="M 250 5 A 245 245 0 0 1 470 185" fill="none" stroke="url(#goldMetallic)" strokeWidth="0.8" strokeDasharray="1 5" opacity="0.7" />
-                <path d="M 35 320 A 245 245 0 0 1 125 470" fill="none" stroke="#3E6E3B" strokeWidth="1.2" strokeDasharray="1 3" opacity="0.6" />
+                  {/* Solid Orbiting Nodes & Sparks */}
+                  <circle cx="430" cy="150" r="5" fill="#D5AC81" />
+                  <circle cx="442" cy="108" r="6" fill="#2B5129" />
+                  <circle cx="410" cy="188" r="2.8" fill="#ECCBA6" />
+                </svg>
+              </motion.div>
 
-                {/* Solid Orbiting Nodes & Sparks - Strictly outside the picture */}
-                {/* Large gold/beige dot */}
-                <circle cx="430" cy="150" r="6" fill="#D5AC81" />
-                {/* Large organic green dot */}
-                <circle cx="442" cy="108" r="7" fill="#2B5129" />
-                {/* Tiny golden node spark */}
-                <circle cx="410" cy="188" r="3.2" fill="#ECCBA6" />
-                {/* Gold dot left */}
-                <circle cx="70" cy="262" r="5" fill="#D5AC81" />
-                {/* Small beige dot bottom left */}
-                <circle cx="125" cy="405" r="4.5" fill="#BA9267" />
-                {/* Green dot bottom */}
-                <circle cx="320" cy="455" r="6.2" fill="#3E6E3B" />
-              </motion.svg>
+              {/* Layer 2b: Counter-Clockwise Orbiting Elements (Inner Rings & Sparks) */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 w-full h-full"
+              >
+                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
+                  {/* Ring 1: Medium Golden Ring (Strictly outside portrait r=205 boundary) */}
+                  <circle cx="250" cy="250" r="215" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.2" opacity="0.75" />
+
+                  {/* Organic green dotted arc detail */}
+                  <path d="M 35 320 A 215 215 0 0 1 125 440" fill="none" stroke="#3E6E3B" strokeWidth="1.2" strokeDasharray="1 3" opacity="0.6" />
+
+                  {/* Solid Orbiting Nodes & Sparks */}
+                  <circle cx="70" cy="262" r="4.5" fill="#D5AC81" />
+                  <circle cx="125" cy="405" r="4" fill="#BA9267" />
+                  <circle cx="320" cy="455" r="5.5" fill="#3E6E3B" />
+                </svg>
+              </motion.div>
             </motion.div>
 
             {/* LAYER 3: Core Portrait Capsule (Frosted glass frame envelope) */}
@@ -379,11 +418,11 @@ export default function Hero() {
       <motion.div
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 cursor-pointer opacity-70 hover:opacity-100 transition-opacity"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 cursor-pointer opacity-70 hover:opacity-100 transition-opacity group z-20"
         onClick={() => handleScrollToSection("about")}
       >
-        <span className="text-xs uppercase font-semibold tracking-widest text-brand-brown-light">Scroll Journey</span>
-        <div className="w-5 h-8 rounded-full border-2 border-brand-brown-light/40 flex items-start justify-center p-1">
+        <span className="text-[10px] md:text-xs uppercase font-semibold tracking-[0.25em] text-brand-brown-light/80 group-hover:text-brand-brown transition-colors duration-300">Scroll to Explore</span>
+        <div className="w-5 h-8 rounded-full border-2 border-brand-brown-light/30 group-hover:border-brand-brown-light/60 flex items-start justify-center p-1 transition-colors duration-300">
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}

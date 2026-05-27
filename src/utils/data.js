@@ -2,7 +2,7 @@ export const PERSONAL_DETAILS = {
   name: "Dasari Vamsi",
   title: "Software Engineer & AI Enthusiast",
   subtitle: "Full Stack Developer",
-  tagline: "Cultivating intelligent applications and harvesting modern digital experiences through code.",
+  tagline: "Building intelligent applications and modern digital experiences through code.",
   email: "dasarivamsi514@gmail.com",
   phone: "+91 9704331950",
   github: "https://github.com/vamsi1426",
