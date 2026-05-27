@@ -298,8 +298,8 @@ export default function Hero() {
               style={{ x: outerRingsX, y: outerRingsY }}
               className="absolute w-[136%] h-[136%] pointer-events-none overflow-visible flex items-center justify-center"
             >
-              {/* Common SVG gradients and filters definitions wrapper (no hidden class to ensure browser parsing) */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+              {/* Single Shared SVG Canvas containing defs and all rotating group layers */}
+              <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible">
                 <defs>
                   {/* Luxury Metallic Gold Gradient */}
                   <linearGradient id="goldMetallic" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -308,18 +308,25 @@ export default function Hero() {
                     <stop offset="70%" stopColor="#D5AC81" />
                     <stop offset="100%" stopColor="#BA9267" />
                   </linearGradient>
+
+                  {/* Luxury Warm Orange Mango Gradient */}
+                  <linearGradient id="orangeMango" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#FFA000" />
+                    <stop offset="50%" stopColor="#FFB01A" />
+                    <stop offset="100%" stopColor="#FF7B47" />
+                  </linearGradient>
                   
                   {/* Inner Soft radial ring glow */}
                   <radialGradient id="ringBackGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="#ECCBA6" stopOpacity="0.22" />
-                    <stop offset="100%" stopColor="#ECCBA6" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#FFA000" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#FFA000" stopOpacity="0" />
                   </radialGradient>
 
                   {/* Soft Luxury Gold Glow Filter */}
                   <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
                     <feGaussianBlur stdDeviation="5" result="blur" />
                     <feComponentTransfer in="blur" result="boost">
-                      <feFuncA type="linear" slope="0.7" />
+                      <feFuncA type="linear" slope="0.75" />
                     </feComponentTransfer>
                     <feMerge>
                       <feMergeNode in="boost" />
@@ -331,7 +338,7 @@ export default function Hero() {
                   <filter id="greenGlow" x="-30%" y="-30%" width="160%" height="160%">
                     <feGaussianBlur stdDeviation="4" result="blur" />
                     <feComponentTransfer in="blur" result="boost">
-                      <feFuncA type="linear" slope="0.55" />
+                      <feFuncA type="linear" slope="0.6" />
                     </feComponentTransfer>
                     <feMerge>
                       <feMergeNode in="boost" />
@@ -339,65 +346,69 @@ export default function Hero() {
                     </feMerge>
                   </filter>
                 </defs>
+
+                {/* Ambient Ring Back Glow */}
+                <circle cx="300" cy="300" r="200" fill="url(#ringBackGlow)" opacity="0.75" />
+
+                {/* Layer 2a: Clockwise Orbiting Group (Innermost Gold Ring & Sparks) */}
+                <motion.g
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+                  style={{ transformOrigin: "300px 300px" }}
+                >
+                  {/* Ring 1: Inner Golden Ring (Solid, with luxury stroke glow) */}
+                  <circle cx="300" cy="300" r="205" fill="none" stroke="url(#goldMetallic)" strokeWidth="2.5" filter="url(#goldGlow)" opacity="0.95" />
+
+                  {/* Solid Orbiting Nodes & Sparks */}
+                  <circle cx="300" cy="95" r="7" fill="url(#goldMetallic)" filter="url(#goldGlow)" />
+                  <circle cx="155" cy="155" r="5" fill="url(#orangeMango)" />
+                </motion.g>
+
+                {/* Layer 2b: Counter-Clockwise Orbiting Group (Middle Orange/Yellow Dashed Ring & Sparks) */}
+                <motion.g
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
+                  style={{ transformOrigin: "300px 300px" }}
+                >
+                  {/* Ring 2: Concentric Orange Mango Dashed Ring */}
+                  <circle cx="300" cy="300" r="230" fill="none" stroke="url(#orangeMango)" strokeWidth="2.0" strokeDasharray="6 12" filter="url(#goldGlow)" opacity="0.9" />
+
+                  {/* Solid Orbiting Nodes & Sparks */}
+                  <circle cx="300" cy="70" r="8" fill="url(#orangeMango)" filter="url(#goldGlow)" />
+                  <circle cx="137" cy="463" r="4.5" fill="#FFC30B" />
+                </motion.g>
+
+                {/* Layer 2c: Clockwise Orbiting Group (Outer Green Dashed Ring & Sparks) */}
+                <motion.g
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 65, repeat: Infinity, ease: "linear" }}
+                  style={{ transformOrigin: "300px 300px" }}
+                >
+                  {/* Ring 3: Concentric Algorithmic Dashed Ring (Warm natural green) */}
+                  <circle cx="300" cy="300" r="255" fill="none" stroke="#3E6E3B" strokeWidth="1.8" strokeDasharray="4 8" filter="url(#greenGlow)" opacity="0.85" />
+
+                  {/* Dotted Gold arc detail */}
+                  <path d="M 85 370 A 255 255 0 0 1 175 530" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.5" strokeDasharray="1 5" opacity="0.7" />
+
+                  {/* Solid Orbiting Nodes & Sparks */}
+                  <circle cx="300" cy="45" r="8.5" fill="#2B5129" filter="url(#greenGlow)" />
+                  <circle cx="521" cy="200" r="5.5" fill="url(#goldMetallic)" />
+                </motion.g>
+
+                {/* Layer 2d: Counter-Clockwise Orbiting Group (Outermost Gold Thin Ring & Sparks) */}
+                <motion.g
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 85, repeat: Infinity, ease: "linear" }}
+                  style={{ transformOrigin: "300px 300px" }}
+                >
+                  {/* Ring 4: Large Thin Golden Ring */}
+                  <circle cx="300" cy="300" r="275" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.2" filter="url(#goldGlow)" opacity="0.85" />
+
+                  {/* Solid Orbiting Nodes & Sparks */}
+                  <circle cx="300" cy="25" r="6" fill="url(#goldMetallic)" />
+                  <circle cx="79" cy="300" r="4.5" fill="#D5AC81" />
+                </motion.g>
               </svg>
-
-              {/* Ambient Ring Back Glow */}
-              <div className="absolute w-full h-full flex items-center justify-center">
-                <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible opacity-60">
-                  <circle cx="300" cy="300" r="200" fill="url(#ringBackGlow)" />
-                </svg>
-              </div>
-
-              {/* Layer 2a: Clockwise Orbiting Elements (Innermost Gold Ring & Sparks) */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 w-full h-full"
-              >
-                <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible">
-                  {/* Ring 1: Medium Golden Ring (Solid, with luxury stroke glow) */}
-                  <circle cx="300" cy="300" r="215" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.8" filter="url(#goldGlow)" opacity="0.95" />
-
-                  {/* Solid Orbiting Nodes & Sparks */}
-                  <circle cx="300" cy="85" r="5.5" fill="#D5AC81" filter="url(#goldGlow)" />
-                  <circle cx="124" cy="198" r="4.5" fill="#3E6E3B" />
-                </svg>
-              </motion.div>
-
-              {/* Layer 2b: Counter-Clockwise Orbiting Elements (Middle Dashed Algorithmic Ring & Sparks) */}
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 58, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 w-full h-full"
-              >
-                <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible">
-                  {/* Ring 2: Concentric Algorithmic Dashed Ring (Warm natural green) */}
-                  <circle cx="300" cy="300" r="235" fill="none" stroke="#3E6E3B" strokeWidth="1.4" strokeDasharray="5 10" filter="url(#greenGlow)" opacity="0.8" />
-
-                  {/* Organic green dotted arc detail */}
-                  <path d="M 85 370 A 235 235 0 0 1 175 510" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.0" strokeDasharray="1 4" opacity="0.5" />
-
-                  {/* Solid Orbiting Nodes & Sparks */}
-                  <circle cx="300" cy="65" r="6.5" fill="#2B5129" filter="url(#greenGlow)" />
-                  <circle cx="493" cy="380" r="3.2" fill="#ECCBA6" />
-                </svg>
-              </motion.div>
-
-              {/* Layer 2c: Clockwise Outer Orbiting Elements (Outermost Gold Thin Ring & Sparks) */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 85, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 w-full h-full"
-              >
-                <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible">
-                  {/* Ring 3: Large Thin Golden Ring */}
-                  <circle cx="300" cy="300" r="255" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.0" filter="url(#goldGlow)" opacity="0.65" />
-
-                  {/* Solid Orbiting Nodes & Sparks */}
-                  <circle cx="521" cy="200" r="5" fill="#BA9267" />
-                  <circle cx="79" cy="300" r="4" fill="#D5AC81" />
-                </svg>
-              </motion.div>
             </motion.div>
 
             {/* LAYER 3: Core Portrait Capsule (Thicker frosted glass edge with warm organic drop shadow) */}
