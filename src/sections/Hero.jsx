@@ -298,8 +298,8 @@ export default function Hero() {
               style={{ x: outerRingsX, y: outerRingsY }}
               className="absolute w-[136%] h-[136%] pointer-events-none overflow-visible flex items-center justify-center"
             >
-              {/* Common SVG gradients and filters definitions wrapper */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible hidden">
+              {/* Common SVG gradients and filters definitions wrapper (no hidden class to ensure browser parsing) */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
                 <defs>
                   {/* Luxury Metallic Gold Gradient */}
                   <linearGradient id="goldMetallic" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -343,8 +343,8 @@ export default function Hero() {
 
               {/* Ambient Ring Back Glow */}
               <div className="absolute w-full h-full flex items-center justify-center">
-                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible opacity-60">
-                  <circle cx="250" cy="250" r="200" fill="url(#ringBackGlow)" />
+                <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible opacity-60">
+                  <circle cx="300" cy="300" r="200" fill="url(#ringBackGlow)" />
                 </svg>
               </div>
 
@@ -354,13 +354,13 @@ export default function Hero() {
                 transition={{ duration: 42, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 w-full h-full"
               >
-                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
+                <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible">
                   {/* Ring 1: Medium Golden Ring (Solid, with luxury stroke glow) */}
-                  <circle cx="250" cy="250" r="215" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.8" filter="url(#goldGlow)" opacity="0.95" />
+                  <circle cx="300" cy="300" r="215" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.8" filter="url(#goldGlow)" opacity="0.95" />
 
                   {/* Solid Orbiting Nodes & Sparks */}
-                  <circle cx="250" cy="35" r="5.5" fill="#D5AC81" filter="url(#goldGlow)" />
-                  <circle cx="74" cy="148" r="4.5" fill="#3E6E3B" />
+                  <circle cx="300" cy="85" r="5.5" fill="#D5AC81" filter="url(#goldGlow)" />
+                  <circle cx="124" cy="198" r="4.5" fill="#3E6E3B" />
                 </svg>
               </motion.div>
 
@@ -370,16 +370,16 @@ export default function Hero() {
                 transition={{ duration: 58, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 w-full h-full"
               >
-                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
+                <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible">
                   {/* Ring 2: Concentric Algorithmic Dashed Ring (Warm natural green) */}
-                  <circle cx="250" cy="250" r="235" fill="none" stroke="#3E6E3B" strokeWidth="1.4" strokeDasharray="5 10" filter="url(#greenGlow)" opacity="0.8" />
+                  <circle cx="300" cy="300" r="235" fill="none" stroke="#3E6E3B" strokeWidth="1.4" strokeDasharray="5 10" filter="url(#greenGlow)" opacity="0.8" />
 
                   {/* Organic green dotted arc detail */}
-                  <path d="M 35 320 A 235 235 0 0 1 125 460" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.0" strokeDasharray="1 4" opacity="0.5" />
+                  <path d="M 85 370 A 235 235 0 0 1 175 510" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.0" strokeDasharray="1 4" opacity="0.5" />
 
                   {/* Solid Orbiting Nodes & Sparks */}
-                  <circle cx="250" cy="15" r="6.5" fill="#2B5129" filter="url(#greenGlow)" />
-                  <circle cx="443" cy="330" r="3.2" fill="#ECCBA6" />
+                  <circle cx="300" cy="65" r="6.5" fill="#2B5129" filter="url(#greenGlow)" />
+                  <circle cx="493" cy="380" r="3.2" fill="#ECCBA6" />
                 </svg>
               </motion.div>
 
@@ -389,13 +389,13 @@ export default function Hero() {
                 transition={{ duration: 85, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 w-full h-full"
               >
-                <svg viewBox="0 0 500 500" className="w-full h-full overflow-visible">
+                <svg viewBox="0 0 600 600" className="w-full h-full overflow-visible">
                   {/* Ring 3: Large Thin Golden Ring */}
-                  <circle cx="250" cy="250" r="255" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.0" filter="url(#goldGlow)" opacity="0.65" />
+                  <circle cx="300" cy="300" r="255" fill="none" stroke="url(#goldMetallic)" strokeWidth="1.0" filter="url(#goldGlow)" opacity="0.65" />
 
                   {/* Solid Orbiting Nodes & Sparks */}
-                  <circle cx="471" cy="150" r="5" fill="#BA9267" />
-                  <circle cx="29" cy="250" r="4" fill="#D5AC81" />
+                  <circle cx="521" cy="200" r="5" fill="#BA9267" />
+                  <circle cx="79" cy="300" r="4" fill="#D5AC81" />
                 </svg>
               </motion.div>
             </motion.div>
