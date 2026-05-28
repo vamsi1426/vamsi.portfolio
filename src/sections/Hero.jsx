@@ -272,8 +272,8 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Right Column (Highly Visually-Polished Layered Concentric Orbiting Gold/Green Rings + Portrait Capsule) */}
-        <div className="flex lg:col-span-6 justify-center items-center order-1 lg:order-2 w-full min-h-[340px] sm:min-h-[460px] md:min-h-[520px] overflow-visible relative mb-6 lg:mb-0">
+        {/* Right Column (Highly Visually-Polished Layered Concentric Orbiting Gold/Green Rings + Portrait Capsule - Hidden on Mobile, Flex on Desktop) */}
+        <div className="hidden lg:flex lg:col-span-6 justify-center items-center order-1 lg:order-2 w-full min-h-[340px] sm:min-h-[460px] md:min-h-[520px] overflow-visible relative mb-6 lg:mb-0">
           
           {/* Main Container with slow floating animation */}
           <motion.div
